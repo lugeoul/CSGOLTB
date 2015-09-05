@@ -93,7 +93,7 @@ function Init() {
     GetBlockedUsers();
 }
 
-function GetUserIdBy(tradeID) {
+function GetUserId(tradeID) {
     var xhr = new XMLHttpRequest();
     xhr.open("GET", "http://csgolounge.com/trade?t=" + tradeID, true);
     xhr.send();
