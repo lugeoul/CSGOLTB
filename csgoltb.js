@@ -9,7 +9,10 @@ var blockedUsers = [];
     m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
 })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'csgoltbga');
 
-csgoltbga('create', 'UA-67226819-2', 'auto');
+var __utmaCookie = document.cookie.replace(/(?:(?:^|.*;\s*)__utma\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+var csgoltbGAUserID = __utmaCookie.split('.')[1] + __utmaCookie.split('.')[2];
+
+csgoltbga('create', 'UA-67226819-2', { 'userId': csgoltbGAUserID });
 csgoltbga('set', 'forceSSL', true);
 csgoltbga('send', 'pageview');
 
@@ -81,6 +84,11 @@ function HideATrade(trade) {
 }
 
 function Init() {
+    if (document.URL != "http://csgolounge.com/" && document.URL.substring(0, 28) != "http://csgolounge.com/result")
+    {
+        console.log("No block buttons required!");
+        return;
+    }
     var tempTradesList = document.getElementsByClassName('tradeheader');
 
     for (var i = 0; i < tempTradesList.length; i++) {
@@ -89,7 +97,6 @@ function Init() {
 
         trades.push({ node: tempTradesList[i], id: tradeID, name: tempTradesList[i].getElementsByTagName("b")[0].innerHTML });
     }
-
     GetBlockedUsers();
 }
 
